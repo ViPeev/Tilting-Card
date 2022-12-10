@@ -1,0 +1,113 @@
+body {
+    display:grid;
+    place-content: center;
+    min-height:100vh;
+}
+
+.tilting-card-body{
+    display:grid;
+    place-content: center;
+    text-align:center;
+}
+
+.tilting-card-wrapper{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+    position:relative;
+}
+
+.mouse-position-tracker {
+    position:absolute;
+    width: calc(100%/3);
+    height:calc(100%/3);
+    z-index:2;
+}
+
+.mouse-position-tracker:nth-child(3n - 2){
+   left:0;
+}
+
+.mouse-position-tracker:nth-child(3n - 1){
+   left:calc(100% / 3);
+}
+
+.mouse-position-tracker:nth-child(3n){
+    right:0;
+}
+
+
+.mouse-position-tracker:nth-child(n + 4):nth-child(-n + 6){
+    top:calc(100% / 3);
+}
+
+.mouse-position-tracker:nth-child(n + 7):nth-child(-n + 9){
+    bottom:0;
+}
+
+.tilting-card-wrapper{
+    position:relative;
+    width:15rem;
+    aspect-ratio:1 / 2;
+}
+
+.tilting-card-body{
+    position:absolute;
+    inset:0;
+    background-image: url('./unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.tilting-card-body > :where(h1){
+    background: white;
+    padding:0.2rem;
+    margin: 0;
+}
+
+.tilting-card-body {
+    --perspective: 500px;
+    --rotationX: 0;
+    --rotationY: 0;
+    --rotationZ: 0;
+    --angle: 15deg;
+    transform: perspective(var(--perspective)) rotateX(var(--rotationX))
+      rotateY(var(--rotationY)) rotateZ(var(--rotationZ));
+    transition: transform 500ms ease;
+  }
+  
+  .mouse-position-tracker:nth-child(1):hover ~ .tilting-card-body {
+    --rotationX: var(--angle);
+    --rotationY: calc(var(--angle) * -1);
+  }
+  
+  .mouse-position-tracker:nth-child(2):hover ~ .tilting-card-body {
+    --rotationX: var(--angle);
+  }
+  
+  .mouse-position-tracker:nth-child(3):hover ~ .tilting-card-body {
+    --rotationX: var(--angle);
+    --rotationY: var(--angle);
+  }
+  
+  .mouse-position-tracker:nth-child(4):hover ~ .tilting-card-body {
+    --rotationY: calc(var(--angle) * -1);
+  }
+  
+  .mouse-position-tracker:nth-child(6):hover ~ .tilting-card-body {
+    --rotationY: var(--angle);
+  }
+  
+  .mouse-position-tracker:nth-child(7):hover ~ .tilting-card-body {
+    --rotationY: calc(var(--angle) * -1);
+    --rotationX: calc(var(--angle) * -1);
+  }
+  
+  .mouse-position-tracker:nth-child(8):hover ~ .tilting-card-body {
+    --rotationX: calc(var(--angle) * -1);
+  }
+  
+  .mouse-position-tracker:nth-child(9):hover ~ .tilting-card-body {
+    --rotationY: var(--angle);
+    --rotationX: calc(var(--angle) * -1);
+  }
